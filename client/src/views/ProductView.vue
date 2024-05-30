@@ -14,7 +14,7 @@
 			</div>
 			<div class="product-actions">
 				<a @click="cart.addToCart(product)">Add to Cart</a>
-				<a href="">Go to checkout</a>
+				<RouterLink :to="{ name: 'Checkout' }">Go to checkout</RouterLink>
 			</div>
 		</div>
 	</div>

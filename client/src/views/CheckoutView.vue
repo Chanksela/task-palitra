@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h1>Cart Page</h1>
+		<h1>Checkout Page</h1>
 		<div v-if="cartStore.cart.length > 0">
 			<ul>
 				<li v-for="cart in cartStore.cart">
@@ -16,15 +16,11 @@
 						<div>{{ cart.price }}</div>
 						<div>Quantity: {{ cart.quantity }}</div>
 					</div>
-					<div class="actions">
-						<p @click="cartStore.addToCart(cart)">+</p>
-						<p @click="cartStore.removeFromCart(cart)">-</p>
-					</div>
 				</li>
 			</ul>
 			<br />
 			<div>Total: {{ cartStore.totalPrice }}</div>
-			<button @click="cartStore.clearCart">Clear Cart</button>
+			<button>Buy Products</button>
 		</div>
 		<div v-else>
 			<div>

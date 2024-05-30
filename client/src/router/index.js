@@ -3,6 +3,7 @@ import { createWebHistory, createRouter } from "vue-router";
 import ProductsView from "../views/ProductsView.vue";
 import ProductView from "../views/ProductView.vue";
 import CartView from "../views/CartView.vue";
+import CheckoutView from "../views/CheckoutView.vue";
 import NotFound from "../views/NotFound.vue";
 
 const routes = [
@@ -24,6 +25,11 @@ const routes = [
 		path: "/cart",
 		name: "Cart",
 		component: CartView,
+	},
+	{
+		path: "/checkout",
+		name: "Checkout",
+		component: CheckoutView,
 	},
 	{
 		path: "/:pathMatch(.*)*",

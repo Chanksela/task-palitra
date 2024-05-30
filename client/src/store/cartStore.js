@@ -13,6 +13,12 @@ export const useCartStore = defineStore("cart", {
 				item.quantity++;
 			}
 		},
+		removeFromCart(item) {
+			if (item.quantity === 1) {
+				this.cart.splice(this.cart.indexOf(item), 1);
+			}
+			item.quantity--;
+		},
 		clearCart() {
 			this.cart = [];
 		},
@@ -20,6 +26,12 @@ export const useCartStore = defineStore("cart", {
 	getters: {
 		totalItems() {
 			return this.cart.length;
+		},
+		totalPrice() {
+			return this.cart.reduce(
+				(acc, item) => acc + item.price * item.quantity,
+				0
+			);
 		},
 	},
 });
