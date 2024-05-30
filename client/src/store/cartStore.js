@@ -6,11 +6,14 @@ export const useCartStore = defineStore("cart", {
 	}),
 	actions: {
 		addToCart(item) {
-			if (!this.cart.includes(item)) {
+			const existingItem = this.cart.find(
+				(cartItem) => cartItem.id === item.id
+			);
+			if (!existingItem) {
 				this.cart.push(item);
 				item.quantity = 1;
 			} else {
-				item.quantity++;
+				existingItem.quantity++;
 			}
 		},
 		removeFromCart(item) {
