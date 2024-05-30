@@ -4,6 +4,7 @@ import ProductsView from "../views/ProductsView.vue";
 import ProductView from "../views/ProductView.vue";
 import CartView from "../views/CartView.vue";
 import CheckoutView from "../views/CheckoutView.vue";
+import DashboardView from "../views/DashboardView.vue";
 import NotFound from "../views/NotFound.vue";
 
 const routes = [
@@ -30,6 +31,11 @@ const routes = [
 		path: "/checkout",
 		name: "Checkout",
 		component: CheckoutView,
+	},
+	{
+		path: "/admin/dashboard",
+		name: "Dashboard",
+		component: DashboardView,
 	},
 	{
 		path: "/:pathMatch(.*)*",

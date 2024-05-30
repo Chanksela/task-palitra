@@ -6,12 +6,13 @@
 					<li>
 						<RouterLink :to="{ name: 'Products' }">Home</RouterLink>
 					</li>
-					<li>
+					<li v-if="route.name !== 'Dashboard'">
 						<RouterLink :to="{ name: 'Cart' }">
 							Cart<span v-if="cart.totalItems > 0">
 								{{ cart.totalItems }}</span
 							></RouterLink
 						>
+						<RouterLink :to="{ name: 'Dashboard' }">Dashboard</RouterLink>
 					</li>
 				</ul>
 			</nav>
@@ -22,7 +23,9 @@
 	</div>
 </template>
 <script setup>
+	import { useRoute } from "vue-router";
 	import { useCartStore } from "@/store/cartStore";
+	const route = useRoute();
 	const cart = useCartStore();
 </script>
 <style scoped>
