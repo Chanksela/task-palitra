@@ -9,6 +9,9 @@ const getProducts = async (req, res) => {
 	}
 };
 const getProduct = async (req, res) => {
+	if (req.params.id === "favicon.ico") {
+		return res.status(204).end();
+	}
 	const product = await Product.getById(req.params.id);
 	res.json(product);
 };
