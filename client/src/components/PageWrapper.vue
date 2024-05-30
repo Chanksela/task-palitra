@@ -7,7 +7,11 @@
 						<RouterLink :to="{ name: 'Products' }">Home</RouterLink>
 					</li>
 					<li>
-						<RouterLink :to="{ name: 'Cart' }">Cart</RouterLink>
+						<RouterLink :to="{ name: 'Cart' }">
+							Cart<span v-if="cart.totalItems > 0">
+								{{ cart.totalItems }}</span
+							></RouterLink
+						>
 					</li>
 				</ul>
 			</nav>
@@ -17,7 +21,10 @@
 		</main>
 	</div>
 </template>
-<script></script>
+<script setup>
+	import { useCartStore } from "@/store/cartStore";
+	const cart = useCartStore();
+</script>
 <style scoped>
 	header {
 		height: 3rem;

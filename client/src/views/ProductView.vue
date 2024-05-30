@@ -13,37 +13,46 @@
 				<p id="price">Price: {{ product.price }}$</p>
 			</div>
 			<div class="product-actions">
-				<a href="">Add to Cart</a>
+				<a @click="cart.addToCart(product)">Add to Cart</a>
 				<a href="">Go to checkout</a>
 			</div>
 		</div>
 	</div>
 </template>
-<script>
+<script setup>
+	import { ref } from "vue";
+	import { onMounted } from "vue";
+
+	import { useRoute, useRouter } from "vue-router";
 	import axios from "axios";
-	export default {
-		data() {
-			return {
-				product: {},
-			};
-		},
-		async created() {
-			try {
-				const response = await axios.get(
-					`http://localhost:3000/api/products/${this.$route.params.id}`
-				);
-				if (response.data) {
-					this.product = response.data;
-					console.log(this.product);
-				} else {
-					this.$router.push({ name: "NotFound" });
-				}
-				this.product = response.data;
-			} catch (error) {
-				console.error(error);
+
+	import { useCartStore } from "@/store/cartStore";
+
+	const route = useRoute();
+	const router = useRouter();
+
+	const cart = useCartStore();
+
+	const product = ref({});
+
+	onMounted(async () => {
+		try {
+			const response = await axios.get(
+				`http://localhost:3000/api/products/${route.params.id}`
+			);
+			if (response.data) {
+				product.value = response.data;
+			} else {
+				router.push({ name: "NotFound" });
 			}
-		},
-	};
+		} catch (error) {
+			console.error(error);
+		}
+
+		return {
+			product,
+		};
+	});
 </script>
 <style scoped>
 	#name {
