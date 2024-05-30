@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 
 import ProductsView from "../views/ProductsView.vue";
+import ProductView from "../views/ProductView.vue";
 import CartView from "../views/CartView.vue";
 import NotFound from "../views/NotFound.vue";
 
@@ -15,13 +16,18 @@ const routes = [
 		component: ProductsView,
 	},
 	{
+		path: "/products/:id",
+		name: "Product",
+		component: ProductView,
+	},
+	{
 		path: "/cart",
 		name: "Cart",
 		component: CartView,
 	},
 	{
 		path: "/:pathMatch(.*)*",
-		name: "404",
+		name: "NotFound",
 		component: NotFound,
 	},
 ];
