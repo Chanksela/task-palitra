@@ -1,6 +1,6 @@
 <template>
 	<div class="dashboard-wrapper">
-		<form @submit.prevent="addProduct" enctype="multipart/form-data">
+		<form @submit="addProduct" enctype="multipart/form-data" method="post">
 			<div>
 				<label for="name">Name</label>
 				<br />
@@ -74,10 +74,11 @@
 			formData.append("photos", productPhotos.value[i]);
 		}
 		try {
-			await axios.post(
+			const response = await axios.post(
 				`https://kakha-palitra-task-839808583d21.herokuapp.com/api/products`,
 				formData
 			);
+
 			productName.value = "";
 			productPrice.value = "";
 			productPhotos.value = [];
