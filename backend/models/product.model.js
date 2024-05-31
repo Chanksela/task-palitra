@@ -7,8 +7,9 @@ class Product {
 	static async getById(id) {
 		return db.getById(`SELECT * FROM products WHERE id = ${id}`);
 	}
-	static async add(body) {
-		const { name, price, photo } = body;
+	static async add(body, photo) {
+		const { name, price } = body;
+
 		return db.add(
 			`INSERT INTO products (name, price, photo) VALUES ('${name}', ${price}, '${photo}')`
 		);

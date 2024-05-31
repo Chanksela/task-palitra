@@ -2,7 +2,7 @@
 	<div class="product-wrapper">
 		<div class="product-image">
 			<img
-				src="https://fastly.picsum.photos/id/6/5000/3333.jpg?hmac=pq9FRpg2xkAQ7J9JTrBtyFcp9-qvlu8ycAi7bUHlL7I"
+				:src="'http://localhost:3000/' + product.photo"
 				alt="product image"
 			/>
 		</div>
