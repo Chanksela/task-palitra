@@ -1,0 +1,85 @@
+button {
+	background-color: transparent;
+	padding: 0.8rem;
+	width: 20px;
+	height: 20px;
+	border: 1px solid black;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+button:hover {
+	background-color: black;
+	color: white;
+	transition: background-color 0.3s;
+}
+.main-wrapper {
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+}
+.left {
+	width: 50%;
+	height: 70vh;
+	overflow-y: scroll;
+}
+.right {
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 2rem;
+}
+.right button {
+	padding: 1rem 2rem;
+	border-radius: 0;
+}
+
+li {
+	display: flex;
+	justify-items: center;
+	align-items: center;
+	gap: 2rem;
+}
+.actions {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.product-wrapper {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 2rem;
+	padding: 2rem;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+}
+a {
+	text-decoration: none;
+	color: black;
+}
+.cart-action {
+	border: 1px solid black;
+	padding: 1rem 2rem;
+	width: 20%;
+	display: flex;
+	justify-content: center;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+.cart-action:hover {
+	text-decoration: none;
+	background-color: black;
+}
+.cart-action:hover a {
+	color: white;
+}
+.home-link {
+	color: blueviolet;
+}
+.home-link:hover {
+	text-decoration: underline;
+}

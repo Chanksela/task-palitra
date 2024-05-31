@@ -15,19 +15,28 @@ export const useCartStore = defineStore("cart", {
 			} else {
 				existingItem.quantity++;
 			}
+			this.updateLocalStorage();
 		},
 		removeFromCart(item) {
 			if (item.quantity === 1) {
 				this.cart.splice(this.cart.indexOf(item), 1);
 			}
 			item.quantity--;
+			this.updateLocalStorage();
 		},
 		clearItem(item) {
 			this.cart = this.cart.filter((product) => product.id !== item.id);
-			// console.log("cart array", this.cart, "cart item", item);
+			this.updateLocalStorage();
 		},
 		clearCart() {
 			this.cart = [];
+			this.updateLocalStorage();
+		},
+		readLocalStorage() {
+			this.cart = JSON.parse(localStorage.getItem("cart")) || [];
+		},
+		updateLocalStorage() {
+			localStorage.setItem("cart", JSON.stringify(this.cart));
 		},
 	},
 	getters: {

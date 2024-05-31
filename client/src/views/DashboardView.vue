@@ -1,7 +1,6 @@
 <template>
-	<div>
-		<h1>Dashboard Page</h1>
-		<form @submit.prevent="addProduct" enctype="multipart/form-data">
+	<div class="dashboard-wrapper">
+		<form @submit="addProduct" enctype="multipart/form-data">
 			<div>
 				<label for="name">Name</label>
 				<br />
@@ -32,6 +31,23 @@
 			</div>
 			<button>Add Product</button>
 		</form>
+		<div class="products-wrapper">
+			<ul class="left">
+				<li v-for="product in productStore.products" class="product-wrapper">
+					<div class="product-cart">
+						<div>
+							<img
+								width="80px"
+								:src="'http://localhost:3000/' + product.photo[0]"
+								alt="product image"
+							/>
+							<p>{{ product.name }}</p>
+						</div>
+						<button @click="removeProduct(product)">Delete</button>
+					</div>
+				</li>
+			</ul>
+		</div>
 	</div>
 </template>
 
@@ -39,8 +55,9 @@
 	import axios from "axios";
 	import { ref } from "vue";
 	import { useRouter } from "vue-router";
+	import { useProductStore } from "@/store/productStore";
 	const router = useRouter();
-
+	const productStore = useProductStore();
 	const productName = ref("");
 	const productPrice = ref("");
 	const productPhotos = ref([]);
@@ -56,12 +73,58 @@
 		for (let i = 0; i < productPhotos.value.length; i++) {
 			formData.append("photos", productPhotos.value[i]);
 		}
-		console.log(...formData);
 		try {
 			await axios.post("http://localhost:3000/api/products", formData);
-			router.push({ name: "Products" });
+			// await productStore.getProducts();
+			productName.value = "";
+			productPrice.value = "";
+			productPhotos.value = [];
 		} catch (error) {
 			console.error(error);
 		}
 	};
+	const removeProduct = (id) => {
+		productStore.removeProduct(id);
+	};
 </script>
+<style scoped>
+	.dashboard-wrapper {
+		display: flex;
+		justify-content: space-between;
+	}
+	.products-wrapper {
+		width: 50%;
+	}
+	.product-wrapper {
+		width: auto;
+	}
+	form {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		width: 50%;
+	}
+
+	.form input {
+		width: 100%;
+	}
+	.form button {
+		width: 100%;
+	}
+	label {
+		font-weight: bold;
+	}
+	button {
+		background-color: white;
+		border-radius: 0;
+		color: black;
+		width: 40%;
+		padding: 1rem 3rem;
+		cursor: pointer;
+		transition: background-color 0.3s, color 0.3s;
+	}
+	button:hover {
+		background-color: black;
+		color: white;
+	}
+</style>

@@ -6,3 +6,17 @@
 main {
 	margin: 0 1.5rem;
 }
+::-webkit-scrollbar {
+	width: 5px;
+}
+::-webkit-scrollbar-track {
+	background: white;
+}
+
+::-webkit-scrollbar-thumb {
+	background: black;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
