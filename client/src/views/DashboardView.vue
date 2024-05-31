@@ -38,7 +38,7 @@
 						<div>
 							<img
 								width="80px"
-								:src="'http://localhost:3000/' + product.photo[0]"
+								:src="`https://kakha-palitra-task-839808583d21.herokuapp.com/${product.photo[0]}`"
 								alt="product image"
 							/>
 							<p>{{ product.name }}</p>
@@ -74,8 +74,10 @@
 			formData.append("photos", productPhotos.value[i]);
 		}
 		try {
-			await axios.post("http://localhost:3000/api/products", formData);
-			// await productStore.getProducts();
+			await axios.post(
+				`https://kakha-palitra-task-839808583d21.herokuapp.com/api/products`,
+				formData
+			);
 			productName.value = "";
 			productPrice.value = "";
 			productPhotos.value = [];

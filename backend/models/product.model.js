@@ -1,6 +1,6 @@
 const db = require("../database");
 
-class Product {
+class ProductModel {
 	static async getAll() {
 		return db.getAll("SELECT * FROM products");
 	}
@@ -19,4 +19,4 @@ class Product {
 	}
 }
 
-module.exports = Product;
+module.exports = ProductModel;

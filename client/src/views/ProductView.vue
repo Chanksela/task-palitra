@@ -3,7 +3,10 @@
 		<div class="product-image">
 			<Carousel :items-to-show="1" :navigation-enabled="true">
 				<Slide v-for="(photo, index) in product.photo" :key="index">
-					<img :src="'http://localhost:3000/' + photo" alt="product image" />
+					<img
+						:src="`https://kakha-palitra-task-839808583d21.herokuapp.com/${photo}`"
+						alt="product image"
+					/>
 				</Slide>
 				<template #addons>
 					<Navigation />
@@ -46,7 +49,7 @@
 	onMounted(async () => {
 		try {
 			const response = await axios.get(
-				`http://localhost:3000/api/products/${route.params.id}`
+				`https://kakha-palitra-task-839808583d21.herokuapp.com/api/products/${route.params.id}`
 			);
 			if (response.data) {
 				product.value = response.data;

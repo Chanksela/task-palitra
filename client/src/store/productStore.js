@@ -11,16 +11,19 @@ export const useProductStore = defineStore("product", {
 	actions: {
 		async getProducts() {
 			const response = await axios.get(
-				`http://localhost:3000/api/products?page=${this.currentPage}`
+				`https://kakha-palitra-task-839808583d21.herokuapp.com/api/products?page=${this.currentPage}`
 			);
 			this.products = response.data.products;
 			this.totalPages = response.data.totalPages;
+			console.log(this.products);
 			this.products.map((product) => {
 				product.photo = JSON.parse(product.photo);
 			});
 		},
 		async removeProduct(product) {
-			await axios.delete(`http://localhost:3000/api/products/${product.id}`);
+			await axios.delete(
+				`https://kakha-palitra-task-839808583d21.herokuapp.com/api/products/${product.id}`
+			);
 			await this.getProducts();
 			useCartStore().clearItem(product);
 		},

@@ -9,4 +9,5 @@ const db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
 	}
 	console.log("Connected to the database");
 });
+
 module.exports = db;

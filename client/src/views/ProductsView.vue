@@ -5,7 +5,7 @@
 				<RouterLink :to="{ name: 'Product', params: { id: product.id } }">
 					<div>
 						<img
-							:src="'http://localhost:3000/' + product.photo[0]"
+							:src="`https://kakha-palitra-task-839808583d21.herokuapp.com/${product.photo[0]}`"
 							alt="product image"
 						/>
 					</div>

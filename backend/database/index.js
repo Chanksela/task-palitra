@@ -3,7 +3,6 @@ const { promisify } = require("util");
 
 const getAll = async (sql) => {
 	const allAsync = promisify(db.all.bind(db));
-
 	try {
 		const data = await allAsync(sql);
 		return data;
