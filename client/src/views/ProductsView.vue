@@ -3,7 +3,7 @@
 		<li v-for="product in products" class="product-card">
 			<RouterLink :to="{ name: 'Product', params: { id: product.id } }">
 				<img
-					:src="'http://localhost:3000/' + product.photo"
+					:src="'http://localhost:3000/' + product.photo[0]"
 					alt="product image"
 				/>
 				<p>{{ product.name }}</p>
@@ -25,6 +25,10 @@
 			try {
 				axios.get("http://localhost:3000/api/products").then((response) => {
 					this.products = response.data;
+					this.products.map(
+						(product) => (product.photo = JSON.parse(product.photo))
+					);
+					console.log("here", this.products);
 				});
 			} catch (error) {
 				console.log(error);

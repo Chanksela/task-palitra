@@ -19,14 +19,15 @@
 				/>
 			</div>
 			<div>
-				<label for="photo">Photo</label>
+				<label for="photos">Photo</label>
 				<br />
 				<input
 					type="file"
-					id="photo"
-					name="photo"
+					id="photos"
+					name="photos"
 					v-on:change="handleFileUpload"
 					multiple
+					accept="image/*"
 				/>
 			</div>
 			<button>Add Product</button>
@@ -42,22 +43,25 @@
 
 	const productName = ref("");
 	const productPrice = ref("");
-	const productPhoto = ref([]);
+	const productPhotos = ref([]);
 
 	const handleFileUpload = (event) => {
-		productPhoto.value = event.target.files;
+		productPhotos.value = event.target.files;
 	};
 
 	const addProduct = async () => {
 		const formData = new FormData();
 		formData.append("name", productName.value);
 		formData.append("price", productPrice.value);
-		formData.append("photo", productPhoto.value[0]);
+		for (let i = 0; i < productPhotos.value.length; i++) {
+			formData.append("photos", productPhotos.value[i]);
+		}
+		console.log(...formData);
 		try {
 			await axios.post("http://localhost:3000/api/products", formData);
 			router.push({ name: "Products" });
 		} catch (error) {
-			throw console.error(error);
+			console.error(error);
 		}
 	};
 </script>
