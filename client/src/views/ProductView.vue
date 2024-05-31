@@ -1,7 +1,15 @@
 <template>
 	<div class="product-wrapper">
-		<div class="product-image" v-for="photo in product.photo">
-			<img :src="'http://localhost:3000/' + photo" alt="product image" />
+		<div class="product-image">
+			<Carousel :items-to-show="1" :navigation-enabled="true">
+				<Slide v-for="(photo, index) in product.photo" :key="index">
+					<img :src="'http://localhost:3000/' + photo" alt="product image" />
+				</Slide>
+				<template #addons>
+					<Navigation />
+					<Pagination />
+				</template>
+			</Carousel>
 		</div>
 		<div class="product-details">
 			<div class="product-info">
@@ -22,6 +30,9 @@
 
 	import { useRoute, useRouter } from "vue-router";
 	import axios from "axios";
+
+	import "vue3-carousel/dist/carousel.css";
+	import { Carousel, Slide, Navigation, Pagination } from "vue3-carousel";
 
 	import { useCartStore } from "@/store/cartStore";
 
@@ -60,9 +71,11 @@
 		font-size: 1.2rem;
 	}
 	img {
-		width: 100%;
+		width: auto;
+		height: 300px;
 	}
 	.product-wrapper {
+		height: 60%;
 		display: flex;
 		gap: 1.2rem;
 	}
