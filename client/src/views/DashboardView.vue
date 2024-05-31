@@ -1,6 +1,6 @@
 <template>
 	<div class="dashboard-wrapper">
-		<form @submit="addProduct" enctype="multipart/form-data" method="post">
+		<form @submit="addProduct" enctype="multipart/form-data">
 			<div>
 				<label for="name">Name</label>
 				<br />
