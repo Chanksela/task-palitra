@@ -5,6 +5,7 @@
 				<ul class="nav">
 					<li>
 						<RouterLink :to="{ name: 'Products' }">Home</RouterLink>
+						<RouterLink :to="{ name: 'Dashboard' }">Dashboard</RouterLink>
 					</li>
 					<li v-if="route.name !== 'Dashboard'">
 						<RouterLink :to="{ name: 'Cart' }">
@@ -12,7 +13,6 @@
 								{{ cart.totalItems }}</span
 							></RouterLink
 						>
-						<RouterLink :to="{ name: 'Dashboard' }">Dashboard</RouterLink>
 					</li>
 				</ul>
 			</nav>
@@ -46,5 +46,9 @@
 		display: flex;
 		justify-content: space-between;
 		padding: 0 2.5rem;
+	}
+	.nav li:first-child {
+		display: flex;
+		gap: 1rem;
 	}
 </style>

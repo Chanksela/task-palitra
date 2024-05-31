@@ -2,12 +2,16 @@
 	<ul class="products-wrapper">
 		<li v-for="product in products" class="product-card">
 			<RouterLink :to="{ name: 'Product', params: { id: product.id } }">
-				<img
-					:src="'http://localhost:3000/' + product.photo[0]"
-					alt="product image"
-				/>
-				<p>{{ product.name }}</p>
-				<p>{{ product.price }}</p>
+				<div>
+					<img
+						:src="'http://localhost:3000/' + product.photo[0]"
+						alt="product image"
+					/>
+				</div>
+				<div>
+					<p>Name: {{ product.name }}</p>
+					<p>Price: {{ product.price }}</p>
+				</div>
 			</RouterLink>
 		</li>
 	</ul>
@@ -45,15 +49,19 @@
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
 	}
-	.products-wrapper li {
+
+	.product-card a {
+		height: 100%;
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
 		align-items: center;
+		justify-content: space-between;
 	}
 
-	.product-card {
+	.product-card a > div:nth-child(2) {
+		align-self: flex-start;
 	}
+
 	.product-card img {
 		width: 15rem;
 	}
