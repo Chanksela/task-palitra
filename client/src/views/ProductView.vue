@@ -18,7 +18,7 @@
 				<p id="price">Price: {{ product.price }}$</p>
 			</div>
 			<div class="product-actions">
-				<a @click="cart.addToCart(product)">Add to Cart</a>
+				<a @click="cartStore.add(product)">Add to Cart</a>
 				<RouterLink :to="{ name: 'Checkout' }">Go to checkout</RouterLink>
 			</div>
 		</div>
@@ -39,7 +39,7 @@
 	const route = useRoute();
 	const router = useRouter();
 
-	const cart = useCartStore();
+	const cartStore = useCartStore();
 
 	const product = ref({});
 
@@ -52,7 +52,7 @@
 				product.value = response.data;
 				product.value.photo = JSON.parse(product.value.photo);
 			} else {
-				router.push({ name: "NotFound" });
+				// router.push({ name: "NotFound" });
 			}
 		} catch (error) {
 			console.error(error);

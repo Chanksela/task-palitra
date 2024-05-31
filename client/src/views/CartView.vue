@@ -3,7 +3,7 @@
 		<h1>Cart Page</h1>
 		<div v-if="cartStore.cart.length > 0">
 			<ul>
-				<li v-for="cart in cartStore.cart">
+				<li v-for="product in cartStore.cart">
 					<div>
 						<div>
 							<img
@@ -12,13 +12,14 @@
 								alt="product image"
 							/>
 						</div>
-						<div>{{ cart.name }}</div>
-						<div>{{ cart.price }}</div>
-						<div>Quantity: {{ cart.quantity }}</div>
+						<div>{{ product.name }}</div>
+						<div>{{ product.price }}</div>
+						<div>Quantity: {{ product.quantity }}</div>
 					</div>
 					<div class="actions">
-						<p @click="cartStore.addToCart(cart)">+</p>
-						<p @click="cartStore.removeFromCart(cart)">-</p>
+						<p @click="cartStore.add(product)">+</p>
+						<p @click="cartStore.removeFromCart(product)">-</p>
+						<p @click="cartStore.clearItem(product)">X</p>
 					</div>
 				</li>
 			</ul>

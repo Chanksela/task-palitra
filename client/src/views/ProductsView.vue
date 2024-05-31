@@ -1,45 +1,57 @@
 <template>
-	<ul class="products-wrapper">
-		<li v-for="product in products" class="product-card">
-			<RouterLink :to="{ name: 'Product', params: { id: product.id } }">
-				<div>
-					<img
-						:src="'http://localhost:3000/' + product.photo[0]"
-						alt="product image"
-					/>
-				</div>
-				<div>
-					<p>Name: {{ product.name }}</p>
-					<p>Price: {{ product.price }}</p>
-				</div>
-			</RouterLink>
-		</li>
-	</ul>
+	<div>
+		<ul class="products-wrapper">
+			<li v-for="product in productStore.products" class="product-card">
+				<RouterLink :to="{ name: 'Product', params: { id: product.id } }">
+					<div>
+						<img
+							:src="'http://localhost:3000/' + product.photo[0]"
+							alt="product image"
+						/>
+					</div>
+					<div>
+						<p>Name: {{ product.name }}</p>
+						<p>Price: {{ product.price }}</p>
+					</div>
+				</RouterLink>
+			</li>
+		</ul>
+		<div>
+			<div @click="prevPage">Prev</div>
+			<div @click="nextPage">Next</div>
+		</div>
+	</div>
 </template>
-<script>
-	import axios from "axios";
-	export default {
-		name: "App",
-		data() {
-			return {
-				products: [],
-			};
-		},
-		created() {
-			try {
-				axios.get("http://localhost:3000/api/products").then((response) => {
-					this.products = response.data;
-					this.products.map(
-						(product) => (product.photo = JSON.parse(product.photo))
-					);
-					console.log("here", this.products);
-				});
-			} catch (error) {
-				console.log(error);
-			}
-		},
+
+<script setup>
+	import { ref, onMounted } from "vue";
+	import { useRouter } from "vue-router";
+	import { useProductStore } from "@/store/productStore";
+
+	const router = useRouter();
+
+	const productStore = useProductStore();
+
+	const prevPage = async () => {
+		await productStore.prevPage();
+		router.push({
+			path: "/products",
+			query: { page: productStore.currentPage.toString() },
+		});
 	};
+	const nextPage = async () => {
+		await productStore.nextPage();
+		router.push({
+			path: "/products",
+			query: { page: productStore.currentPage.toString() },
+		});
+	};
+
+	onMounted(() => {
+		productStore.getProducts();
+	});
 </script>
+
 <style scoped>
 	a {
 		text-decoration: none;

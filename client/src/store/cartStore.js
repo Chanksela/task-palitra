@@ -5,7 +5,7 @@ export const useCartStore = defineStore("cart", {
 		cart: [],
 	}),
 	actions: {
-		addToCart(item) {
+		add(item) {
 			const existingItem = this.cart.find(
 				(cartItem) => cartItem.id === item.id
 			);
@@ -21,6 +21,10 @@ export const useCartStore = defineStore("cart", {
 				this.cart.splice(this.cart.indexOf(item), 1);
 			}
 			item.quantity--;
+		},
+		clearItem(item) {
+			this.cart = this.cart.filter((product) => product.id !== item.id);
+			// console.log("cart array", this.cart, "cart item", item);
 		},
 		clearCart() {
 			this.cart = [];

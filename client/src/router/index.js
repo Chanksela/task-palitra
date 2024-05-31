@@ -10,7 +10,7 @@ import NotFound from "../views/NotFound.vue";
 const routes = [
 	{
 		path: "/",
-		redirect: "/products",
+		redirect: { name: "Products" },
 	},
 	{
 		path: "/products",

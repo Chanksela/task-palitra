@@ -4,7 +4,9 @@
 			<nav>
 				<ul class="nav">
 					<li>
-						<RouterLink :to="{ name: 'Products' }">Home</RouterLink>
+						<RouterLink :to="{ name: 'Products' }" @click="goToHome"
+							>Home
+						</RouterLink>
 						<RouterLink :to="{ name: 'Dashboard' }">Dashboard</RouterLink>
 					</li>
 					<li v-if="route.name !== 'Dashboard'">
@@ -25,8 +27,17 @@
 <script setup>
 	import { useRoute } from "vue-router";
 	import { useCartStore } from "@/store/cartStore";
+	import { useProductStore } from "@/store/productStore";
+
 	const route = useRoute();
+
 	const cart = useCartStore();
+	const productStore = useProductStore();
+
+	const goToHome = () => {
+		productStore.resetCurrentPage();
+		productStore.getProducts();
+	};
 </script>
 <style scoped>
 	header {
