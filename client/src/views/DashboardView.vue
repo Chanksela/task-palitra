@@ -1,6 +1,6 @@
 <template>
 	<div class="dashboard-wrapper">
-		<form @submit="addProduct" enctype="multipart/form-data">
+		<form @submit.prevent="addProduct" enctype="multipart/form-data">
 			<div>
 				<label for="name">Name</label>
 				<br />
@@ -78,7 +78,9 @@
 				`https://kakha-palitra-task-839808583d21.herokuapp.com/api/products`,
 				formData
 			);
-
+			if (response) {
+				window.location.reload();
+			}
 			productName.value = "";
 			productPrice.value = "";
 			productPhotos.value = [];
