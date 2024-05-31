@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<h1>Dashboard Page</h1>
-		<form @submit.prevent="addProduct">
+		<form @submit.prevent="addProduct" enctype="multipart/form-data">
 			<div>
 				<label for="name">Name</label>
 				<br />
@@ -19,9 +19,16 @@
 				/>
 			</div>
 			<div>
-				<label for="photo">Photo</label>
+				<label for="photos">Photo</label>
 				<br />
-				<input type="text" id="photo" name="photo" v-model="productPhoto" />
+				<input
+					type="file"
+					id="photos"
+					name="photos"
+					v-on:change="handleFileUpload"
+					multiple
+					accept="image/*"
+				/>
 			</div>
 			<button>Add Product</button>
 		</form>
@@ -31,27 +38,30 @@
 <script setup>
 	import axios from "axios";
 	import { ref } from "vue";
+	import { useRouter } from "vue-router";
+	const router = useRouter();
 
 	const productName = ref("");
 	const productPrice = ref("");
-	const productPhoto = ref("");
+	const productPhotos = ref([]);
 
-	const addProduct = () => {
-		const data = {
-			name: productName.value,
-			price: productPrice.value,
-			photo: productPhoto.value,
-		};
+	const handleFileUpload = (event) => {
+		productPhotos.value = event.target.files;
+	};
 
-		axios
-			.post("http://localhost:3000/api/products", data)
-			.then((response) => {
-				productName.value = "";
-				productPrice.value = "";
-				productPhoto.value = "";
-			})
-			.catch((error) => {
-				console.error(error);
-			});
+	const addProduct = async () => {
+		const formData = new FormData();
+		formData.append("name", productName.value);
+		formData.append("price", productPrice.value);
+		for (let i = 0; i < productPhotos.value.length; i++) {
+			formData.append("photos", productPhotos.value[i]);
+		}
+		console.log(...formData);
+		try {
+			await axios.post("http://localhost:3000/api/products", formData);
+			router.push({ name: "Products" });
+		} catch (error) {
+			console.error(error);
+		}
 	};
 </script>

@@ -1,10 +1,7 @@
 <template>
 	<div class="product-wrapper">
-		<div class="product-image">
-			<img
-				src="https://fastly.picsum.photos/id/6/5000/3333.jpg?hmac=pq9FRpg2xkAQ7J9JTrBtyFcp9-qvlu8ycAi7bUHlL7I"
-				alt="product image"
-			/>
+		<div class="product-image" v-for="photo in product.photo">
+			<img :src="'http://localhost:3000/' + photo" alt="product image" />
 		</div>
 		<div class="product-details">
 			<div class="product-info">
@@ -42,6 +39,7 @@
 			);
 			if (response.data) {
 				product.value = response.data;
+				product.value.photo = JSON.parse(product.value.photo);
 			} else {
 				router.push({ name: "NotFound" });
 			}

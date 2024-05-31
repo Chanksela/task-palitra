@@ -16,7 +16,11 @@ const getProduct = async (req, res) => {
 	res.json(product);
 };
 const addProduct = async (req, res) => {
-	await Product.add(req.body);
+	const photos = req.files.map((file) => file.path);
+	console.log(photos);
+	const photosJson = JSON.stringify(photos);
+	console.log(photosJson);
+	await Product.add(req.body, photosJson);
 	res.json("Product Added");
 };
 const deleteProduct = async (req, res) => {
